@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Todo Apps</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+<link rel="stylesheet" type="text/css" href="/resources/css/style.css" />
+<link rel="stylesheet" type="text/css" href="/resources/css/boostrap.min.css" />
+
+<script type="text/javascript" src="/resources/js/angular.min.js"></script>
+
+<script type="text/javascript" src="/resources/js/map.js"></script>
+
+<style>
+.container {
+	margin-top: 27px;
+}
+</style>
+
+
+
+</head>
+<body>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+		<a class="navbar-brand" href="#">Todo Apps</a>
+		
+	</nav>
+	<div class="container" ng-app="todo">
+		
+		<div class="row" ng-controller="postcontroller">
+			<form>
+				<div class="col-md-12 input-group mb-3">
+					<!-- <div class="col-xs-3 input-group-prepend">
+						<span class="input-group-text">Task</span>
+					</div> -->
+          <div class="col-xs-3 input-group-prepend">
+					   <input type="text" class="form-control" ng-model="data.title" placeholder="task" aria-label="task" />
+          </div>
+					<div class="col-xs-3 input-group-append">
+						<button type="button" class="btn btn-primary" ng-click="save()">Save</button>
+					</div>
+				</div>
+
+			</form>
+			<div class="alert alert-danger" ng-show="errorVO.hasError">
+				<strong>Error!</strong> {{errorVO.errorDesc}}
+			</div>
+		</div>
+		<div class="table-responsive" ng-controller="dataMgmtController"
+			ng-show="data.length>0" ng-init="fetchAllData()">
+			<div th:replace="fragments/edit :: templates" />
+			<div class="alert alert-danger" ng-show="errorVO.hasError">
+				<strong>Error!</strong> {{errorVO.errorDesc}}
+			</div>
+			<table class="table table-hover table-striped table-bordered">
+				<thead class="thead-dark">
+					<tr>
+						<th style="display:none;">Id</th>
+						<th>Title</th>
+						<th>CreatedAt</th>
+						<th>Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="todo in data" ng-include="getTemplate(todo)" />
+
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+
+</body>
+</html>

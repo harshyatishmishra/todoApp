@@ -1,0 +1,25 @@
+ <div th:fragment="templates">
+<script type="text/ng-template" id="editTemplate">
+<td style="display:none;">{{selectedData.id}}</td>
+<td><input type="text" class="form-control" ng-model="selectedData.title" value="{{selectedData.title}}"/></td>
+<td>{{selectedData.createdAt  |date:'medium'}}</td>
+<td><div class="btn-group" role="group">
+								<button type="button" 
+									class="btn btn-primary" ng-click="save($index)">Save</button>
+								<button type="button" 
+									class="btn  btn-warning" ng-click="cancel()">Cancel</button>
+							</div></td>
+</script>
+			<script type="text/ng-template" id="showTemplate">
+<td style="display:none;">{{todo.id}}</td>
+<td>{{todo.title}}</td>
+<td>{{todo.createdAt |date:'medium'}}</td>
+<td><div class="btn-group" role="group">
+								<button type="button" 
+									class="btn btn-secondary" ng-click="edit(todo)">Edit</button>
+								<button type="button" 
+									class="btn btn-danger" ng-click="deleteRecord(todo.id,$index)">Delete</button>
+							</div></td>
+
+</script>
+</div>
